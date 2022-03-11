@@ -348,7 +348,25 @@ Our first attempt to publish was a last minute affair, staying up late into the 
 Over the following year and a half, two revisions of that first paper were submitted and subsequently rejected. Dr. Lonsdale had kind of given up on the paper. But in April 2011, two years after our original attempt, we succeeded! This success was a big confidence booster, for me. The experience helped me to learn about the whole process of researching a question of interest to others in a global conversation of ideas, designing and running experiments, analyzing results, and writing to contribute to the conversation. I learned a lot about writing. I learned to express myself so that others could understand what I wanted to communicate.     
 
 <p>
-<small>Last revised 9 March 2022</small>
+While working on my oral proficiency paper, I also worked on my thesis. On May 13th 2009, I recorded some thoughts which describe the direction of my thesis research: "I had been guessing as to how my solution might be different from the GMM, Gaussian mixture model. One difference is that the GMM gives more probability to common words than to less common words. This is most useful if test instances are long, and comparable to the training corpus as a whole. However, often this is not the case. Typically, the test instance is short and not representative of the training corpus as a whole. I want to estimate the probability that a word is one of the many very different words which all belong to a language, rather than estimating the probability that a word is an example of the language as a whole."
+
+<p>
+On July 13th 2009 I recorded: "I went to the temple Saturday and received some guidance regarding a model to generate language. My language model can contain my training data, all in order. I can generate language by reproducing the training data, all in order. This would represent the highest level of correlation with the data. Lower levels of correlation could be obtained by introducing discontinuities. If a generated sequence only has one discontinuity, that means that it can be divided once, to form two sequences, both of which are sub-sequences of the data. A measure of similarity to the language would be the approximate number of discontinuities in a sequence divided by the length of the sequence."
+
+<p>
+That idea came to me in the temple. The Lord helped me in my research. He has helped me all along throughout my life, though much of His help has come by way of letting me struggle, without providing the specific help I thought I needed.
+
+<p>
+The idea consisted of generating language by concatenating segments of the training data. The average length of the segments could be used as a similarity measure, similarity of the generated language to the language of the training data.
+
+<p>
+To illustrate, training data might be a newspaper. A segment might be a sequence of characters from the newspaper, such as part of a word, a whole word, part of a sentence, and so forth. Suppose that the newspaper contains "the dog barked so loudly that". Now suppose that I want to determine if the sequence of characters "the dogs barked" belongs to the same language as the newspaper. I could generate that sequence by concatenating segments found in the newspaper: "the dog", "s", and " barked". The average length of these segments is 5 characters, which could be used to measure similarity between "the dogs barked" and the newspaper.  
+
+<p>                   
+Prevailing measures of similarity gave high scores to sequences containing segments which occur often in the training data, while this measure ignored the popularity of segments and only considered their length. I hoped to show that this measure would prove useful for estimating the probability that a sequence belonged to a language. 
+
+<p>
+<small>Last revised 11 March 2022</small>
 <p>
 <small>Copyright &copy; 2022 Kevin Cook</small>
 </body>
