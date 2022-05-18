@@ -327,13 +327,7 @@ Dr. Lonsdale introduced me to a professor in the computer science department who
 Dr. Ringger invited me to sit in on his statistical natural language processing course. I was totally fascinated! After the end of the course, I asked if I could sit in on another. He let me know that I needed to enroll as a student. 
 
 <p>
-So, I applied to the Master's degree program in computer science, and miraculously was accepted. I was SO excited. I was embarking on a new career, belatedly but finally where I belonged.  
-
-<p>
-I had participated in research groups with both Dr. Lonsdale and Dr. Ringger. Dr. Ringger's group was studying spoken language identification, automatically determining which of several common languages of the world is being spoken in recorded speech.
-
-<p>
-I decided to address the language identification problem for my Master's thesis. I became interested in understanding what was required to obtain an arbitrarily high correct classification rate. 
+So, I applied to the Master's degree program in computer science with Dr. Ringer as my advisor, and miraculously was accepted. I was SO excited. I was embarking on a new career, belatedly but finally where I belonged.  
 
 <p>
 Upon entering the program in the Fall of 2008, I took a part-time job grading papers for another professor in the Computer Science department, Kevin Seppi. I thought it was pathetic that I was working for so little money, but I was grateful for the employment and for the opportunity to learn more about the work of education.
@@ -348,7 +342,10 @@ Our first attempt to publish was a last minute affair, staying up late into the 
 Over the following year and a half, two revisions of that first paper were submitted and subsequently rejected. Dr. Lonsdale had kind of given up on the paper. But in April 2011, two years after our original attempt, we succeeded! This success was a big confidence booster, for me. The experience helped me to learn about the whole process of researching a question of interest to others in a global conversation of ideas, designing and running experiments, analyzing results, and writing to contribute to the conversation. I learned a lot about writing. I learned to express myself so that others could understand what I wanted to communicate.     
 
 <p>
-While working on my oral proficiency paper, I also worked on my thesis. On May 13th 2009, I recorded some thoughts which describe the direction of my thesis research: "I had been guessing as to how my solution might be different from the GMM, Gaussian mixture model. One difference is that the GMM gives more probability to common words than to less common words. This is most useful if test instances are long, and comparable to the training corpus as a whole. However, often this is not the case. Typically, the test instance is short and not representative of the training corpus as a whole. I want to estimate the probability that a word is one of the many very different words which all belong to a language, rather than estimating the probability that a word is an example of the language as a whole."
+While working on my oral proficiency paper, I also worked on my thesis. I had participated in research groups with both Dr. Lonsdale and Dr. Ringger. Dr. Ringger's group was studying spoken language identification, automatically determining which of several common languages of the world is being spoken in recorded speech. I decided to address the language identification problem for my Master's thesis. I became interested in understanding what was required to obtain an arbitrarily high correct classification rate. 
+
+<p>
+Initially, I worked with spoken language. One popular method for identifying language was strongly influenced by commonly spoken words. I wanted to be able to recognize a language even when the words spoken were not common.  
 
 <p>
 On July 13th 2009 I recorded: "I went to the temple Saturday and received some guidance regarding a model to generate language. My language model can contain my training data, all in order. I can generate language by reproducing the training data, all in order. This would represent the highest level of correlation with the data. Lower levels of correlation could be obtained by introducing discontinuities. If a generated sequence only has one discontinuity, that means that it can be divided once, to form two sequences, both of which are sub-sequences of the data. A measure of similarity to the language would be the approximate number of discontinuities in a sequence divided by the length of the sequence."
@@ -365,8 +362,11 @@ To illustrate, training data might be a newspaper. A segment might be a sequence
 <p>                   
 Prevailing measures of similarity gave high scores to sequences containing segments which occur often in the training data, while this measure ignored the popularity of segments and only considered their length. I hoped to show that this measure would prove useful for estimating the probability that a sequence belonged to a language. 
 
+<p>                   
+The basic innovation I proposed was not specific to spoken language. I figured it could be applied to either spoken or written language, text. If the innovation had value, I should be able to demonstrate that value using text. It would be much easier to run experiments with text, rather than with audio. Also, the field of text classification was more general and widely studied than the field of spoken language identification. So, I decided to first try to validate my ideas using standard text classification tasks. 
+
 <p>
-<small>Last revised 11 March 2022</small>
+<small>Last revised 18 May 2022</small>
 <p>
 <small>Copyright &copy; 2022 Kevin Cook</small>
 </body>
