@@ -1,19 +1,210 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html lang="en-US"><head><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Reader</title><style>button {
+  width: 32%;
+  height: 160px;
+  font-size: x-large;
+}
+</style>
+</head>
 <body>
-<div id="content">
+<audio src="" id="player"></audio>
+<div><button id="prevButton" type="button"><-</button>
+<button id="playButton" type="button">Play</button>
+<button id="nextButton" type="button">-></button>
+</div>
+<div><p id="text">And it came to pass ...</p>
+</div>
+<div><button id="prevChapterButton" type="button"><<-</button>
+<button type="button">- -</button>
+<button id="nextChapterButton" type="button">->></button>
 </div>
 <script>
+const api = "https://chm5ks3vil.execute-api.us-east-2.amazonaws.com";
+
+let currentVerse = 0;
+let currentChapter = 0;
+let playerStop = 0;
+let segmentStart = 0;
+let segmentStop = 0;
+let chapter = {};
 
 init();
 
 async function init() {
-  let url = "https://chm5ks3vil.execute-api.us-east-2.amazonaws.com/reader";
-  let response = await fetch(url, {
-    method: "GET"
-  });
-  content.innerHTML = await response.text();
+  try {
+    restorePlace();
+    await addListener();
+    chapter = await getChapter();
+    await load(chapter.audioUrl);
+    update();
+  } catch (error) {
+    alert('init ' + error.name + ' ' + error.message);
+  }
 }
+
+function restorePlace() {
+  let storedChapter = localStorage.getItem("Chapter");
+  if (storedChapter) {
+    currentChapter = Number(storedChapter);
+  } else {
+    currentChapter = 0;
+  }
+  let storedVerse = localStorage.getItem("Verse");
+  if (storedVerse) {
+    currentVerse = Number(storedVerse);
+  } else {
+    currentVerse = 0;
+  }
+  console.log("restore " + currentChapter + " " + currentVerse);
+}
+
+function addListener() {
+  player.addEventListener('timeupdate', async function() {
+    if (player.currentTime >= playerStop) {
+      try {
+        await player.pause();
+      } catch (error) {
+        alert('addEventListener ' + error.name + ' ' + error.message);
+      }
+    }
+  }, false);
+}
+
+async function update() {
+  console.log("update " + currentChapter + " " + currentVerse);
+  console.log(chapter);
+  try {
+    text.innerHTML = chapter.text[currentVerse];
+    console.log("Here");
+    console.log(chapter.text[currentVerse]);
+    if (currentVerse < 1) {
+      segmentStart = 0; 
+    } else {
+      segmentStart = chapter.endTimes[currentVerse - 1];
+    }
+    segmentStop = chapter.endTimes[currentVerse];
+    saveVerse();
+    //await load(audioUrl);
+  } catch (error) {
+    alert('update ' + error.name + ' ' + error.message);
+  }
+}
+
+
+async function play(start, stop) {
+  try {
+    console.log(`Play: ${start} ${stop}`);
+    await player.pause();
+    if (stop > start) {
+      player.currentTime = start;
+      playerStop = stop;
+      await player.play(); 
+    }
+  } catch (error) {
+    //alert('play ' + error.name + ' ' + error.message);
+    console.log('play ' + error.name + ' ' + error.message);
+  }
+}
+
+async function load(src) {
+  try {
+    await player.pause();
+    player.src = src;
+    await player.load();
+  } catch (error) {
+    console.log('load ' + error.name + ' ' + error.message);
+  }
+}
+
+function nextVerse() {
+  if (currentVerse < chapter.text.length - 1) {
+    currentVerse += 1;
+    update();
+  }
+}
+
+async function nextChapter() {
+  if (currentChapter < 238) {
+    currentChapter += 1;
+    currentVerse = 0;
+    saveChapterAndVerse();
+    chapter = await getChapter();
+    await load(chapter.audioUrl);
+    update();
+  }
+}
+
+function previousVerse() {
+  if (currentVerse > 0) {
+    currentVerse -= 1;
+    update();
+  }
+}
+
+function saveChapter() {
+  localStorage.setItem("Chapter", currentChapter);
+}
+
+function saveVerse() {
+  localStorage.setItem("Verse", currentVerse);
+}
+
+function saveChapterAndVerse() {
+  saveChapter();
+  saveVerse();
+}
+
+async function previousChapter() {
+  if (currentChapter > 0) {
+    currentChapter -= 1;
+    currentVerse = 0;
+    saveChapterAndVerse();
+    chapter = await getChapter();
+    await load(chapter.audioUrl);
+    update();
+  }
+}
+
+playButton.onclick = async () => {
+  await play(segmentStart, segmentStop);
+}
+
+nextButton.onclick = async () => {
+  nextVerse();
+  await play(segmentStart, segmentStop);
+}
+
+nextChapterButton.onclick = async () => {
+  await nextChapter();
+  await play(segmentStart, segmentStop);
+}
+
+prevChapterButton.onclick = async () => {
+  await previousChapter();
+  await play(segmentStart, segmentStop);
+}
+
+prevButton.onclick = async () => {
+  previousVerse();
+  await play(segmentStart, segmentStop);
+}
+
+function send(httpMethod, route, message) {
+  let response = fetch(api + route, {
+    method: httpMethod,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(message)
+  });
+  return response;
+}
+
+async function getChapter() {
+  let response = await send("POST","/data",{
+    "Chapter": currentChapter
+  }); 
+  return await response.json();
+}
+
 </script>
-</body>
-</html>
+</body></html>
