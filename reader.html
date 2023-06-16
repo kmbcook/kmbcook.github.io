@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="content">
+</div>
+<script>
+
+init();
+
+async function init() {
+  let url = "https://chm5ks3vil.execute-api.us-east-2.amazonaws.com/reader";
+  let response = await fetch(url, {
+    method: "GET"
+  });
+  content.innerHTML = await response.text();
+}
+</script>
+</body>
+</html>
