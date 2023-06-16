@@ -62,7 +62,6 @@ function restorePlace() {
   } else {
     currentVerse = 0;
   }
-  console.log("restore " + currentChapter + " " + currentVerse);
 }
 
 function addListener() {
@@ -78,12 +77,8 @@ function addListener() {
 }
 
 async function update() {
-  console.log("update " + currentChapter + " " + currentVerse);
-  console.log(chapter);
   try {
     text.innerHTML = chapter.text[currentVerse];
-    console.log("Here");
-    console.log(chapter.text[currentVerse]);
     if (currentVerse < 1) {
       segmentStart = 0; 
     } else {
@@ -100,7 +95,6 @@ async function update() {
 
 async function play(start, stop) {
   try {
-    console.log(`Play: ${start} ${stop}`);
     await player.pause();
     if (stop > start) {
       player.currentTime = start;
@@ -119,7 +113,7 @@ async function load(src) {
     player.src = src;
     await player.load();
   } catch (error) {
-    console.log('load ' + error.name + ' ' + error.message);
+    alert('load ' + error.name + ' ' + error.message);
   }
 }
 
