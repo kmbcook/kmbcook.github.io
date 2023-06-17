@@ -35,7 +35,9 @@ This site stores current chapter and verse identifiers on your device, so that y
 </small>
 </div>
 <script>
+
 const api = "https://chm5ks3vil.execute-api.us-east-2.amazonaws.com";
+const numChapters = 121;
 
 let currentVerse = 0;
 let currentChapter = 0;
@@ -134,7 +136,7 @@ function nextVerse() {
 }
 
 async function nextChapter() {
-  if (currentChapter < 238) {
+  if (currentChapter < numChapters - 1) {
     currentChapter += 1;
     currentVerse = 0;
     saveChapterAndVerse();
