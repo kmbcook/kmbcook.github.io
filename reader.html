@@ -28,7 +28,7 @@
 <div>
 <small>
 <p>
-NOT FOR PUBLIC USE. Permission required to provide text and audio of the Book of Mormon is requested. Text and audio obtained from <a href="https://churchofjesuschrist.org">churchofjesuschrist.org</a>.
+NOT FOR PUBLIC USE. Permission required to provide text and audio of the Book of Mormon has been requested. Text and audio obtained from <a href="https://churchofjesuschrist.org">churchofjesuschrist.org</a>.
 
 </p><p>
 This site stores current chapter and verse identifiers on your device, so that your place will not be lost when your browser closes.  
@@ -133,10 +133,12 @@ async function load(src) {
   }
 }
 
-function nextVerse() {
+async function nextVerse() {
   if (currentVerse < chapter.text.length - 1) {
     currentVerse += 1;
     update();
+  } else {
+    await nextChapter();
   }
 }
 
@@ -151,10 +153,16 @@ async function nextChapter() {
   }
 }
 
-function previousVerse() {
+async function previousVerse() {
   if (currentVerse > 0) {
     currentVerse -= 1;
     update();
+  } else {
+    if (currentChapter > 0) {
+      await previousChapter();
+      currentVerse = chapter.text.length - 1;
+      update();
+    }
   }
 }
 
@@ -187,7 +195,7 @@ playButton.onclick = async () => {
 }
 
 nextButton.onclick = async () => {
-  nextVerse();
+  await nextVerse();
   await play(segmentStart, segmentStop);
 }
 
@@ -202,7 +210,7 @@ prevChapterButton.onclick = async () => {
 }
 
 prevButton.onclick = async () => {
-  previousVerse();
+  await previousVerse();
   await play(segmentStart, segmentStop);
 }
 
