@@ -562,6 +562,9 @@ Shortly after Brian died I found a much simpler way to prove my thesis. The expe
 I learned something from those results which amazed me. In my thesis I argued that if a probability that a sequence belongs to a language is desired, then it is important to avoid assuming a degree of generalization. I proposed two methods for avoiding such an assumption: MINS and Segment Selection. MINS was very simple and fast. Segment Selection was sophisticated and slower. I assumed that Segment Selection would be more effective, but it wasn't. MINS was better! I figured that this fact was significant and planned to base my doctoral research on it.
 
 </p><p>
+MINS (Minimal Number of Segments) is the minimal number of segments required to generate a sequence of characters Y by concatenating segments found in a sequence of characters X, denoted as mins(X&rarr;Y), where each segment is a contiguous sequence of characters.
+
+</p><p>
 The kickoff meeting was the start of a research project funded by the US Air Force to learn more about using UAVs (Unmanned Aerial or Air Vehicles) to intelligently and cooperatively track ground targets in an urban environment. BYU had been selected to help with this research project because of the MAGICC lab led by Randy Beard from the electrical engineering department and Tim McLain from the mechanical engineering department. Dr. Seppi (from the computer science department) got involved, and then he invited me to share my ideas about how research in language modeling could be applied to this urban target tracking problem. The urban environment meant that there would be tall buildings which would sometimes prevent UAVs from viewing the ground target. A similar situation occurs in language modeling when an unknown word is part of a sentence. An unknown word is similar to a period of time in which the ground target is not observed by UAVs overhead.
 
 </p><p>
@@ -591,7 +594,7 @@ A few days later, I wrote a note to myself about using MINS to infer information
 
 <blockquote>
 <p>
-Calculate MINS from observed sequence B to observed sequence C, <i>mins</i>(B&rarr;C). Then do the reverse, calculate MINS from observed sequence C to observed sequence B, <i>mins</i>(C&rarr;B). If those two MINS values are similar and low, then the common ancestor is probably closely and similarly related to both observed sequences. If the two MINS values are similar and high, then the common ancestor is probably distantly and similarly related to both observed sequences. If <i>mins</i>(B&rarr;C) is low and <i>mins</i>(C&rarr;B) is high, then the common ancestor is probably more closely related to sequence C. And, if <i>mins</i>(B&rarr;C) is high and <i>mins</i>(C&rarr;B) is low, then the common ancestor is probably more closely related to sequence B. 
+Calculate MINS from observed sequence B to observed sequence C, mins(B&rarr;C). Then do the reverse, calculate MINS from observed sequence C to observed sequence B, mins(C&rarr;B). If those two MINS values are similar and low, then the common ancestor is probably closely and similarly related to both observed sequences. If the two MINS values are similar and high, then the common ancestor is probably distantly and similarly related to both observed sequences. If mins(B&rarr;C) is low and mins(C&rarr;B) is high, then the common ancestor is probably more closely related to sequence C. And, if mins(B&rarr;C) is high and mins(C&rarr;B) is low, then the common ancestor is probably more closely related to sequence B. 
 </p>
 </blockquote> 
 
